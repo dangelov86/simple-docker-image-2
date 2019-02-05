@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auto-demo-deploy
+  name: auto-demo-deploy-2
 spec:
   replicas: 3
   selector:
     matchLabels: 
-      app: auto-demo
+      app: auto-demo-2
   minReadySeconds: 10
   strategy:
     type: RollingUpdate
@@ -16,10 +16,10 @@ spec:
   template:
     metadata:
       labels:
-        app: auto-demo
+        app: auto-demo-2
     spec:
       containers:
-      - name: auto-demo-container
+      - name: auto-demo-container-2
         image: shekeriev/k8s-jenkins:%IMAGE-PLACEHOLDER%
         ports:
         - containerPort: 80 
@@ -27,9 +27,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: auto-demo-svc
+  name: auto-demo-svc-2
   labels:
-    app: auto-demo
+    app: auto-demo-2
 spec:
   type: NodePort
   ports:
@@ -37,4 +37,4 @@ spec:
     nodePort: 30003
     protocol: TCP
   selector:
-    app: auto-demo
+    app: auto-demo-2
